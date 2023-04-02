@@ -16,6 +16,7 @@ if ('clean' -eq $clean) {
 if ('build' -eq $build) {
     Write-Output "compiling and creating uberJar file per command-line param..."
     del    .\build\libs\*.jar
+    del    .\app-docscan.jar
     gradle clean
     gradle build
     gradle uberJar
