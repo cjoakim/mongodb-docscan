@@ -2,6 +2,8 @@
 
 .idea/
 
+app/build/
+
 **/scan*.jar
 **/app/out/*.json
 **/clusters.txt
