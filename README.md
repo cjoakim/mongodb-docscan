@@ -42,12 +42,9 @@ Important: The friendly-names in clusters.txt must be unique.
 <friendly-cluster-name-3>|mongodb+srv://<user>:<password>@<host3>
 ```
 
-### Compiling is Optional, the repo contains an executable uberJar file
+### Compiling is Optional; the repo contains an executable uberJar file
 
-```
-> cd app
-> gradle build 
-```
+See the docscan.ps1 **build** option below.
 
 ### Execution 
 
@@ -59,16 +56,25 @@ Execute the **docscan.ps1** PowerShell script as follows:
   or
 > .\docscan.ps1 clean            Same as above, but also cleans\deletes previous output in the out\ directory
   or
-> .\docscan.ps1 clean build      Same as above, but also compiles the code with Gradle
+> .\docscan.ps1 clean build      Same as above, but also compiles the code and creates the uberJar with Gradle
 ```
 
 The Java program will execute once for each line in clusters.txt, and create an output
-JSON file in the out\ directory.  One output file per execution.
+JSON file in the out\ directory.  One output file is created per execution.
+The output filenames contain the friendly name, mongodb host name, and the epoch timestamp.
 
-Sample output filename with friendly name, host name, and epoch timestamp:
+Example output filename:
 
 ```
 DocScanResults_friendlyname.some.host_1680439419463.json
+```
+
+At the end of the script, docscan.ps1 will create a Jar/Zip file containing the contents
+of the out\ directory.  The zip file is created in the same directory as docscan.ps1.
+The zip file will contain the date and time; for example:
+
+```
+docscan-20230402-1014.zip
 ```
 
 ---
