@@ -11,6 +11,7 @@ MongoDB Document Scannner utility program
   - JDK/JRE version 11 minimum, see https://www.mongodb.com/docs/drivers/java/sync/current/faq/
   - Compiler is optional
 _ Gradle build tool, but only IF you choose to compile the code
+  - **This repo already contains the compiled app-docscan.jar uberJar, so compilation is not necessary**
   - see https://gradle.org/
 - Network access to the source MongoDB clusters
 - Windows, macOS, or Linux OS
@@ -30,11 +31,11 @@ Note: 'openjdk 11.0.16.1 2022-08-12 LTS' was used to build this project
 - Edit file app/clusters.txt with your target MongoDB cluster configuration
   - note the format of each line in this file: **friendly-name then a vertibar then the connection string**
 
-Note: File **clusters.txt** is intentionally git-ignored in this repo.
+Note: File **clusters.txt** is intentionally **git-ignored** in this repo.
 
 Important: The friendly-names in clusters.txt must be unique.
 
-#### Example
+#### Example clusters.txt file
 
 ```
 <friendly-cluster-name-1>|mongodb+srv://<user>:<password>@<host1>
@@ -42,13 +43,17 @@ Important: The friendly-names in clusters.txt must be unique.
 <friendly-cluster-name-3>|mongodb+srv://<user>:<password>@<host3>
 ```
 
-### Compiling is Optional; the repo contains an executable uberJar file
+### Compiling is Optional
 
-See the docscan.ps1 **build** option below.
+See the docscan.ps1 and docscan.sh **build** option below.
 
 ### Execution 
 
-Execute the **docscan.ps1** PowerShell script as follows:
+Both a **docscan.ps1** PowerShell script for Windows and a **docscan.sh** Bash script
+for macOS and Linux are in this repo.  These scripts perform equivalent functionality.
+
+The following instructions are for Windows and PowerShell, but the macOS/Linux usage
+is similar.
 
 ```
 > cd app
@@ -57,6 +62,7 @@ Execute the **docscan.ps1** PowerShell script as follows:
 > .\docscan.ps1 clean            Same as above, but also cleans\deletes previous output in the out\ directory
   or
 > .\docscan.ps1 clean build      Same as above, but also compiles the code and creates the uberJar with Gradle
+                                 This repo already contains the compiled app-docscan.jar uberJar, so compilation is not necessary
 ```
 
 The Java program will execute once for each line in clusters.txt, and create an output
@@ -66,7 +72,7 @@ The output filenames contain the friendly name, mongodb host name, and the epoch
 Example output filename:
 
 ```
-DocScanResults_friendlyname.some.host_1680439419463.json
+DocScanResults_someclustername.somehost_1680439419463.json
 ```
 
 At the end of the script, docscan.ps1 will create a Jar/Zip file containing the contents
@@ -76,6 +82,8 @@ The zip file will contain the date and time; for example:
 ```
 docscan-20230402-1014.zip
 ```
+
+Please share this zip file with your Microsoft team.
 
 ---
 

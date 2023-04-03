@@ -17,6 +17,8 @@ import java.util.TimeZone;
 public class ScanResults {
 
     // Instance variables:
+
+    public String version;
     private long startEpoch;
     private String startDate;
     private long finishEpoch;
@@ -33,6 +35,7 @@ public class ScanResults {
     public ScanResults() {
         super();
         try {
+            version = "2023/04/03 10:38am";
             startEpoch = System.currentTimeMillis();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:MM z");
             sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
@@ -47,6 +50,10 @@ public class ScanResults {
     public void setSourceUrl(String connString) {
         ConnectionString cs = new ConnectionString(connString);
         hosts = cs.getHosts();
+    }
+
+    public String getVersion() {
+        return version;
     }
 
     public List<String> getHosts() {
@@ -68,7 +75,7 @@ public class ScanResults {
     public String calculateFilename() throws Exception {
         String hostPart = String.join("_", getHosts());
         String timePart = "" + getStartEpoch();
-        return "out/DocScanResults_" + hostPart + "_" + timePart +  ".json";
+        return "out/DocScanResults_" + clusterName + "_" + hostPart + "_" + timePart +  ".json";
     }
 
     public long getStartEpoch() {
