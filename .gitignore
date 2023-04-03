@@ -1,16 +1,16 @@
 ## cj
 
-.idea/
+**/.idea/
 
 app/build/
+**/bin/
+**/tmp/
 
 **/scan*.jar
 **/app/out/*.json
 **/clusters.txt
 **/DocScanResults*.json
-**/tmp/
 **/*.zip
-
 
 
 ## generated per GitHu Gradle project type
